@@ -1,0 +1,90 @@
+{
+    "name": "cas-ms-master-capacitacion",
+    "version": "1.0.0",
+    "description": "Servicio de párrafos para sistema Núcleo Digital",
+    "main": "server.js",
+    "scripts": {
+        "coverage": "jest --ci --coverage --no-cache",
+        "build": "webpack -p --define process.env.NODE_ENV_CUSTOM='\"dev\"'",
+        "build:cert": "webpack -p --define process.env.NODE_ENV_CUSTOM='\"cert\"'",
+        "build:preprod": "webpack -p --define process.env.NODE_ENV_CUSTOM='\"preprod\"'",
+        "build:prod": "webpack -p --define process.env.NODE_ENV_CUSTOM='\"production\"'",
+        "start": "node server.js",
+        "start-dev": "nodemon server.js",
+        "docs": "jsdoc -c ./app/util/docs/jsdoc.json -t ./node_modules/ink-docstrap/template -R ./app/util/docs/README.md -r",
+        "sonar": "node sonar-project.js"
+    },
+    "author": "everis",
+    "license": "ISC",
+    "dependencies": {
+        "body-parser": "^1.19.0",
+        "bunyan": "^1.8.14",
+        "compression": "^1.7.4",
+        "cors": "^2.8.5",
+        "crypto-js": "^4.1.1",
+        "dotenv": "^8.2.0",
+        "express": "^4.17.1",
+        "express-redis-cache": "^1.1.3",
+        "oracledb": "^5.0.0",
+        "redis": "^3.0.2",
+        "swagger-ui-express": "^4.1.4"
+    },
+    "devDependencies": {
+        "cross-env": "^7.0.2",
+        "ink-docstrap": "^1.3.2",
+        "jest": "^26.5.0",
+        "jest-sonar-reporter": "^2.0.0",
+        "jsdoc": "^3.6.6",
+        "nodemon": "^2.0.4",
+        "sonarqube-scanner": "^2.7.0",
+        "supertest": "^5.0.0",
+        "webpack": "^4.41.6",
+        "webpack-cli": "^3.3.11",
+        "webpack-node-externals": "^1.7.2"
+    },
+    "jest": {
+        "verbose": true,
+        "testEnvironment": "node",
+        "setupFiles": [
+            "<rootDir>/app/util/jestEnvVars.js"
+        ],
+        "coveragePathIgnorePatterns": [
+            "/node_modules/",
+            "/app/api/__mocks__/",
+            "/app/services/__mocks__/",
+            "/app/tests/",
+            "/dist/",
+            "/docs/",
+            "/build/",
+            "/routes/",
+            "server.js",
+            "sonar-project.js",
+            "webpack.config.js"
+        ],
+        "testPathIgnorePatterns": [
+            "/dist/",
+            "/app/api/__mocks__/",
+            "/app/services/__mocks__/",
+            "/node_modules/",
+            "/docs/",
+            "/build/"
+        ],
+        "collectCoverageFrom": [
+            "**/*.{js,jsx}",
+            "!**/node_modules/**",
+            "!**/__mocks__/**",
+            "!**/data-access/**",
+            "!**/coverage/**",
+            "!**/config/**",
+            "!**/util/**",
+            "!**/tests/**",
+            "!**/vendor/**"
+        ],
+        "testResultsProcessor": "jest-sonar-reporter"
+    },
+    "jestSonar": {
+        "reportPath": "coverage",
+        "reportFile": "test-reporter.xml",
+        "indent": 4
+    }
+}

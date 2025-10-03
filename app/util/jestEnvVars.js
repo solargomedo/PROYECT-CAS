@@ -1,0 +1,1 @@
+process.env.PROJECT_NAME = 'test-cas-ms-master-capacitacion';
